@@ -23,7 +23,7 @@ resource "aws_instance" "blog" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "HelloWorld"
+    Name = "ScalingTest"
   }
 
   vpc_security_group_ids = [aws_security_group.blog.id]
