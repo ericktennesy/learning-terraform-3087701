@@ -1,22 +1,14 @@
 data "aws_ami" "app_ami" {
   most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["979382823631"] # Bitnami
 }
 
-resource "aws_instance" "web" {
+data "aws_vpc" "default" {
+  default = true
+}
+
+resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
-  instance_type = "t3.nano"
+  instance_type = var.instance_type
 
   tags = {
     Name = "TestStart"
